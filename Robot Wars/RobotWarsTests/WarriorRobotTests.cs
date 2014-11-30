@@ -49,7 +49,7 @@ namespace RobotWarsTests
             var robot = new WarriorRobot();
             robot.UploadArena(new Arena(1, 1));
             robot.StartAt(SimpleVector());
-            robot.SetCommandList(commandList);
+            robot.ExecuteCommandList(commandList);
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace RobotWarsTests
         {
             var commandList = new List<RobotCommand>();
             var robot = new WarriorRobot();
-            Assert.Throws<WarriorRobot.StartLocationNotSetException>(() => robot.SetCommandList(commandList));
+            Assert.Throws<WarriorRobot.StartLocationNotSetException>(() => robot.ExecuteCommandList(commandList));
         }
 
         [Test]
@@ -75,9 +75,21 @@ namespace RobotWarsTests
         }
 
         [Test]
-        public void TestName()
+        public void ExecutingASingleCommandUpdatesThePositionAsExpected()
         {
+            var startPosition = new RobotVector(new Position(0, 0), Heading.North);
 
+            var robot = new WarriorRobot();
+            robot.UploadArena(new Arena(1, 1));
+            robot.StartAt(startPosition);
+            
+            var commandList = new List<RobotCommand>();
+            commandList.Add(new MoveForwards());
+            robot.ExecuteCommandList(commandList);
+
+            RobotVector reportedPosition = robot.ReportPosition();
+
+            Assert.That(startPosition, Is.Not.EqualTo(reportedPosition));
         }
     }
 }

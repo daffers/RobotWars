@@ -12,6 +12,9 @@ namespace RobotWars.Positioning
             _yCord = yCord;
         }
 
+        public int XCord { get { return _xCord; } }
+        public int YCord { get { return _yCord; } }
+
         public bool Equals(Position other)
         {
             return _xCord == other._xCord && _yCord == other._yCord;

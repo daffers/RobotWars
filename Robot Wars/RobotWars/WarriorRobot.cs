@@ -16,10 +16,15 @@ namespace RobotWars
             _arena = arena;
         }
         
-        public void SetCommandList(List<RobotCommand> commandList)
+        public void ExecuteCommandList(List<RobotCommand> commandList)
         {
             if (!_startLocationSet)
                 throw new StartLocationNotSetException();
+
+            foreach (var robotCommand in commandList)
+            {
+                _currentPosition = robotCommand.GenerateNewVector(_currentPosition);
+            }
         }
 
         public class ArenaNotUploadedException: Exception
