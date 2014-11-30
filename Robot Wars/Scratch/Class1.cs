@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
+using RobotWars;
 
 namespace Scratch
 {
@@ -30,24 +31,6 @@ namespace Scratch
             Assert.That(finalPositions.Count, Is.EqualTo(2));
             Assert.That(finalPositions[0], Is.EqualTo(rover1ExpectedFinalPositon));
             Assert.That(finalPositions[0], Is.EqualTo(rover2ExpectedFinalPositon));
-        }
-    }
-
-    public class ControlConsole
-    {
-        public void SetGrid(string gridSize)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void SetRoverPositionAndCommands(string rover1StartingVector, string rover1MovementSequence)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public List<string> GetFinalPositions()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
