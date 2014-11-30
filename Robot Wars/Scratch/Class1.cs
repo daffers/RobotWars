@@ -59,14 +59,19 @@ namespace Scratch
         {
             var robot = new WarriorRobot();
             robot.UploadArena(new Arena(1,1));
-            robot.StartAt(0, 0, "N");
+            robot.StartAt(SimpleVector());
         }
 
         [Test]
         public void CannotStartARobotWhenNoArenaUploaded()
         {
             var robot = new WarriorRobot();
-            Assert.Throws<WarriorRobot.ArenaNotUploadedException>(() => robot.StartAt(0, 0, "N"));
+            Assert.Throws<WarriorRobot.ArenaNotUploadedException>(() => robot.StartAt(SimpleVector()));
+        }
+
+        private static RobotVector SimpleVector()
+        {
+            return new RobotVector(new Position(0, 0), Heading.North);
         }
 
         [Test]
@@ -75,7 +80,7 @@ namespace Scratch
             var commandList = new List<RobotCommand>();
             var robot = new WarriorRobot();
             robot.UploadArena(new Arena(1, 1));
-            robot.StartAt(0, 0, "N");
+            robot.StartAt(SimpleVector());
             robot.SetCommandList(commandList);
         }
 
@@ -103,15 +108,7 @@ namespace Scratch
         {
             _arena = arena;
         }
-
-        public void StartAt(int xCord, int yCord, string direction)
-        {
-            if (_arena == null)
-                throw new ArenaNotUploadedException();
-
-            _startLocationSet = true;
-        }
-
+        
         public void SetCommandList(List<RobotCommand> commandList)
         {
             if (!_startLocationSet)
@@ -124,6 +121,14 @@ namespace Scratch
 
         public class StartLocationNotSetException : Exception
         {
+        }
+
+        public void StartAt(RobotVector robotVector)
+        {
+            if (_arena == null)
+                throw new ArenaNotUploadedException();
+
+            _startLocationSet = true;
         }
     }
 
@@ -233,4 +238,110 @@ namespace Scratch
         }
     }
 
+    public struct RobotVector
+    {
+        private readonly Position _position;
+        private readonly Heading _heading;
+
+        public RobotVector(Position position, Heading heading)
+        {
+            _position = position;
+            _heading = heading;
+        }
+
+        public Position Position { get { return _position; } }
+        public Heading Heading { get { return _heading; } }
+    }
+
+    [TestFixture]
+    public class RobotVectorTests
+    {
+        [Test]
+        public void CanReadBackVectorValues()
+        {
+            var position = new Position(0, 0);
+            var heading = Heading.North;
+            var robotVector = new RobotVector(position, heading);
+
+            Assert.That(robotVector.Position, Is.EqualTo(position));
+            Assert.That(robotVector.Heading, Is.EqualTo(heading));
+        }
+    }
+
+    public enum Heading
+    {
+        North
+    }
+
+    [TestFixture]
+    public class PositionTests
+    {
+        [TestCase(0,0,1,1, false)]
+        [TestCase(1,1,1,1, true)]
+        [TestCase(1,2,1,2, true)]
+        [TestCase(0,1,1,2, false)]
+        public void EqualityTests(int positon1X, int positon1Y, int position2X, int position2Y, bool shouldBeEqual)
+        {
+            var positionOne = new Position(positon1X, positon1Y);
+            var positionTwo = new Position(position2X, position2Y);
+
+            Assert.AreEqual(shouldBeEqual, positionOne == positionTwo);
+        }
+
+        [TestCase(0, 0, 1, 1, true)]
+        [TestCase(1, 1, 1, 1, false)]
+        [TestCase(1, 2, 1, 2, false)]
+        [TestCase(0, 1, 1, 2, true)]
+        public void InEqualityTests(int positon1X, int positon1Y, int position2X, int position2Y, bool shouldNotBeEqual)
+        {
+            var positionOne = new Position(positon1X, positon1Y);
+            var positionTwo = new Position(position2X, position2Y);
+
+            Assert.AreEqual(shouldNotBeEqual, positionOne != positionTwo);
+        }
+    }
+
+
+    public struct Position
+    {
+        private readonly int _xCord;
+
+        private readonly int _yCord;
+
+        public Position(int xCord, int yCord)
+        {
+            _xCord = xCord;
+            _yCord = yCord;
+        }
+
+        public bool Equals(Position other)
+        {
+            return _xCord == other._xCord && _yCord == other._yCord;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            return obj is Position && Equals((Position) obj);
+        }
+
+        public static bool operator ==(Position left, Position right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Position left, Position right)
+        {
+            return !(left == right);
+        }
+
+        //Resharper generated
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (_xCord*397) ^ _yCord;
+            }
+        }
+    }
 }
