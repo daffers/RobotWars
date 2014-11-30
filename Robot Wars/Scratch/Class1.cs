@@ -72,6 +72,24 @@ namespace Scratch
         [Test]
         public void CanProvideCommandsToRobot()
         {
+            var commandList = new List<RobotCommand>();
+            var robot = new WarriorRobot();
+            robot.UploadArena(new Arena(1, 1));
+            robot.StartAt(0, 0, "N");
+            robot.SetCommandList(commandList);
+        }
+
+        [Test]
+        public void CannotSetCommandListUntilRobotHasStartingLocation()
+        {
+            var commandList = new List<RobotCommand>();
+            var robot = new WarriorRobot();
+            Assert.Throws<WarriorRobot.StartLocationNotSetException>(() => robot.SetCommandList(commandList));
+        }
+
+        [Test]
+        public void CanReportARobotsPosition()
+        {
 
         }
     }
@@ -79,11 +97,8 @@ namespace Scratch
     public class WarriorRobot
     {
         private Arena _arena;
-
-        public void StartOn(Arena arena)
-        {
-        }
-
+        private bool _startLocationSet;
+        
         public void UploadArena(Arena arena)
         {
             _arena = arena;
@@ -93,9 +108,21 @@ namespace Scratch
         {
             if (_arena == null)
                 throw new ArenaNotUploadedException();
+
+            _startLocationSet = true;
+        }
+
+        public void SetCommandList(List<RobotCommand> commandList)
+        {
+            if (!_startLocationSet)
+                throw new StartLocationNotSetException();
         }
 
         public class ArenaNotUploadedException: Exception
+        {
+        }
+
+        public class StartLocationNotSetException : Exception
         {
         }
     }
@@ -205,4 +232,5 @@ namespace Scratch
             throw new ArgumentException();
         }
     }
+
 }
