@@ -6,7 +6,9 @@ namespace RobotWars.Commands
     {
         public override RobotVector GenerateNewVector(RobotVector currentPosition)
         {
-            throw new System.NotImplementedException();
+            var newHeading = (currentPosition.Heading.GetHashCode() + 90) % 360;
+
+            return new RobotVector(currentPosition.Position, (Heading)newHeading);
         }
     }
 }

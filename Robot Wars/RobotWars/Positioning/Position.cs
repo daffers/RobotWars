@@ -45,4 +45,44 @@ namespace RobotWars.Positioning
             }
         }
     }
+
+    public struct XDimensionUnit
+    {
+        private readonly int _units;
+
+        public XDimensionUnit(int units)
+        {
+            _units = units;
+        }
+
+        public static Position operator +(Position startingPoint, XDimensionUnit movement)
+        {
+            return new Position(startingPoint.XCord + movement._units, startingPoint.YCord);
+        }
+
+        public static Position operator -(Position startingPoint, XDimensionUnit movement)
+        {
+            return new Position(startingPoint.XCord - movement._units, startingPoint.YCord);
+        }
+    }
+
+    public struct YDimensionUnit
+    {
+        private readonly int _units;
+
+        public YDimensionUnit(int units)
+        {
+            _units = units;
+        }
+
+        public static Position operator +(Position startingPoint, YDimensionUnit movement)
+        {
+            return new Position(startingPoint.XCord, startingPoint.YCord + movement._units);
+        }
+
+        public static Position operator -(Position startingPoint, YDimensionUnit movement)
+        {
+            return new Position(startingPoint.XCord, startingPoint.YCord - movement._units);
+        }
+    }
 }

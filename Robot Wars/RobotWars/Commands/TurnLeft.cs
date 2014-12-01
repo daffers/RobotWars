@@ -1,3 +1,4 @@
+using System;
 using RobotWars.Positioning;
 
 namespace RobotWars.Commands
@@ -6,7 +7,9 @@ namespace RobotWars.Commands
     {
         public override RobotVector GenerateNewVector(RobotVector currentPosition)
         {
-            throw new System.NotImplementedException();
+            var newHeading = (currentPosition.Heading.GetHashCode() + 270) % 360;
+
+            return new RobotVector(currentPosition.Position, (Heading)newHeading);
         }
     }
 }
