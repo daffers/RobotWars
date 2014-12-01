@@ -92,4 +92,74 @@ namespace RobotWarsTests
             Assert.That(startPosition, Is.Not.EqualTo(reportedPosition));
         }
     }
+
+    [TestFixture]
+    public class MovementTests
+    {
+        [Test]
+        public void MoveForwardWhenFacingNorth()
+        {
+            const int startXCord = 0;
+            const int startYCord = 0;
+            const Heading startingHeading = Heading.North;
+
+            var command = new MoveForwards();
+
+            RobotVector result = command.GenerateNewVector(new RobotVector(new Position(startXCord,startYCord), startingHeading));
+
+            Assert.That(result.Position.YCord, Is.EqualTo(startYCord + 1));
+            Assert.That(result.Position.XCord, Is.EqualTo(startXCord));
+            Assert.That(result.Heading, Is.EqualTo(startingHeading));
+        }
+
+        [Test]
+        public void MoveForwardWhenFacingSouth()
+        {
+            const int startXCord = 0;
+            const int startYCord = 0;
+            const Heading startingHeading = Heading.South;
+
+            var command = new MoveForwards();
+
+            RobotVector result = command.GenerateNewVector(new RobotVector(new Position(startXCord, startYCord), startingHeading));
+
+            Assert.That(result.Position.YCord, Is.EqualTo(startYCord - 1));
+            Assert.That(result.Position.XCord, Is.EqualTo(startXCord));
+            Assert.That(result.Heading, Is.EqualTo(startingHeading));
+        }
+        
+        [Test]
+        public void MoveForwardWhenFacingEast()
+        {
+            const int startXCord = 0;
+            const int startYCord = 0;
+            const Heading startingHeading = Heading.East;
+
+            var command = new MoveForwards();
+
+            RobotVector result = command.GenerateNewVector(new RobotVector(new Position(startXCord, startYCord), startingHeading));
+
+            Assert.That(result.Position.YCord, Is.EqualTo(startYCord));
+            Assert.That(result.Position.XCord, Is.EqualTo(startXCord + 1));
+            Assert.That(result.Heading, Is.EqualTo(startingHeading));
+        }
+        
+        [Test]
+        public void MoveForwardWhenFacingWest()
+        {
+            const int startXCord = 0;
+            const int startYCord = 0;
+            const Heading startingHeading = Heading.West;
+
+            var command = new MoveForwards();
+
+            RobotVector result = command.GenerateNewVector(new RobotVector(new Position(startXCord, startYCord), startingHeading));
+
+            Assert.That(result.Position.YCord, Is.EqualTo(startYCord));
+            Assert.That(result.Position.XCord, Is.EqualTo(startXCord - 1));
+            Assert.That(result.Heading, Is.EqualTo(startingHeading));
+        }
+
+
+    }
 }
