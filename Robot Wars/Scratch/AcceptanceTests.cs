@@ -8,7 +8,6 @@ namespace Scratch
     public class AcceptanceTests
     {
         [Test]
-        [Ignore("Awaiting implementation")]
         public void AcceptanceCriteriaPassesThroughConsole()
         {
             const string gridSize = "5 5";
@@ -30,7 +29,7 @@ namespace Scratch
 
             Assert.That(finalPositions.Count, Is.EqualTo(2));
             Assert.That(finalPositions[0], Is.EqualTo(rover1ExpectedFinalPositon));
-            Assert.That(finalPositions[0], Is.EqualTo(rover2ExpectedFinalPositon));
+            Assert.That(finalPositions[1], Is.EqualTo(rover2ExpectedFinalPositon));
         }
     }
 }

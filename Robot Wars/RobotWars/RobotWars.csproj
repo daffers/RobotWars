@@ -46,6 +46,7 @@
     <Compile Include="Commands\TurnLeft.cs" />
     <Compile Include="Commands\TurnRight.cs" />
     <Compile Include="ControlConsole.cs" />
+    <Compile Include="LocationParser.cs" />
     <Compile Include="Positioning\Heading.cs" />
     <Compile Include="Positioning\Position.cs" />
     <Compile Include="Positioning\RobotVector.cs" />

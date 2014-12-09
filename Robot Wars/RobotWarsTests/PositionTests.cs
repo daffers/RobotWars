@@ -29,5 +29,14 @@ namespace RobotWarsTests
 
             Assert.AreEqual(shouldNotBeEqual, positionOne != positionTwo);
         }
+
+        [TestCase(0, 0, "0 0")]
+        [TestCase(1, 0, "1 0")]
+        [TestCase(0, 1, "0 1")]
+        public void PositionFormatsCorrectly(int xCord, int yCord, string expected)
+        {
+            var position = new Position(xCord, yCord);
+            Assert.That(position.ToString(), Is.EqualTo(expected));
+        }
     }
 }

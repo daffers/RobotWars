@@ -16,7 +16,7 @@ namespace RobotWars
             _arena = arena;
         }
         
-        public void ExecuteCommandList(List<RobotCommand> commandList)
+        public void ExecuteCommandList(IEnumerable<RobotCommand> commandList)
         {
             if (!_startLocationSet)
                 throw new StartLocationNotSetException();

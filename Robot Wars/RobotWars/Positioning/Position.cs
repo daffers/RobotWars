@@ -44,6 +44,11 @@ namespace RobotWars.Positioning
                 return (_xCord*397) ^ _yCord;
             }
         }
+
+        public override string ToString()
+        {
+            return string.Format("{0} {1}", _xCord, _yCord);
+        }
     }
 
     public struct XDimensionUnit

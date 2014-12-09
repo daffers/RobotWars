@@ -49,7 +49,12 @@ namespace RobotWars.Positioning
         
         public override string ToString()
         {
-            return "0 0 N";
+            return string.Format("{0} {1}",_position.ToString(), FormatHeading());
+        }
+
+        private string FormatHeading()
+        {
+            return _heading.ToString().ToUpper()[0].ToString();
         }
     }
 }

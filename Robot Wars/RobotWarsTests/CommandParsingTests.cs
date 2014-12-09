@@ -75,23 +75,18 @@ namespace RobotWarsTests
             Assert.That(commands[7], Is.TypeOf<MoveForwards>());
         }
 
-        [Test]
-        public void CanParseAStartingLocation()
+        [TestCase("0 0 N")]
+        [TestCase("0 0 E")]
+        [TestCase("0 0 S")]
+        [TestCase("0 0 W")]
+        [TestCase("1 0 N")]
+        [TestCase("0 1 N")]
+        public void CanParseAStartingLocation(string startingLocation)
         {
-            const string startingLocation = "0 0 N";
-
             var locationParser = new LocationParser();
             RobotVector location = locationParser.Parse(startingLocation);
 
             Assert.That(location.ToString(), Is.EqualTo(startingLocation));
-        }
-    }
-
-    public class LocationParser
-    {
-        public RobotVector Parse(string startingLocation)
-        {
-            return new RobotVector();
         }
     }
 }
