@@ -46,5 +46,10 @@ namespace RobotWars.Positioning
                 return (_position.GetHashCode()*397) ^ (int) _heading;
             }
         }
+        
+        public override string ToString()
+        {
+            return "0 0 N";
+        }
     }
 }

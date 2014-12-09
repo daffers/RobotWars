@@ -1,8 +1,10 @@
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using RobotWars;
 using RobotWars.Commands;
+using RobotWars.Positioning;
 
 namespace RobotWarsTests
 {
@@ -71,6 +73,25 @@ namespace RobotWarsTests
             Assert.That(commands[5], Is.TypeOf<TurnLeft>());
             Assert.That(commands[6], Is.TypeOf<TurnRight>());
             Assert.That(commands[7], Is.TypeOf<MoveForwards>());
+        }
+
+        [Test]
+        public void CanParseAStartingLocation()
+        {
+            const string startingLocation = "0 0 N";
+
+            var locationParser = new LocationParser();
+            RobotVector location = locationParser.Parse(startingLocation);
+
+            Assert.That(location.ToString(), Is.EqualTo(startingLocation));
+        }
+    }
+
+    public class LocationParser
+    {
+        public RobotVector Parse(string startingLocation)
+        {
+            return new RobotVector();
         }
     }
 }

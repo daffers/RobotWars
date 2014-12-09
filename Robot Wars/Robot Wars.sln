@@ -1,13 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scratch", "Scratch\Scratch.csproj", "{4C26310B-D0B6-4614-9356-2E9C13C022BE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{73F4057A-31B2-48AC-9033-2A36A3ECC1C9}"
 	ProjectSection(SolutionItems) = preProject
 		..\README.md = ..\README.md
+		RobotWarsCodeProblemCSharp.docx = RobotWarsCodeProblemCSharp.docx
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotWars", "RobotWars\RobotWars.csproj", "{2C6597C4-F20A-4254-B164-C2C7FEC5144D}"
